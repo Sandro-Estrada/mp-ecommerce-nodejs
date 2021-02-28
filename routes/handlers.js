@@ -129,7 +129,9 @@ router.post('/notifications/weebhooks', async (req, res) => {
             console.log(req.body,"-------req.body")
         }
         const payload = type ? req.body : req.query
-        res.json(payload)
+        console.log(payload,"payload")
+        res.sendStatus(200);
+        //res.json(payload)
     } catch (error) {
         console.error(error)
         res.status(500).json(error)
