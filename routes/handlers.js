@@ -98,14 +98,8 @@ router.post('/notifications/ipn', async (req, res) => {
 
 router.post('/notifications/weebhooks', async (req, res) => {
     try {
-        console.log("MERCADOPAGO WEBHOOK");
-  console.log("req.query")
-  console.log(req.query)
-  console.log("req.body")
-  console.log(req.body)
         const {
             type = null,
-            id,
             data
         } = req.body
         let response = null
@@ -125,12 +119,8 @@ router.post('/notifications/weebhooks', async (req, res) => {
             default:
                 break
         }
-        if (type) {
-            console.log(response,"-------response")
-            console.log(req.body,"-------req.body")
-        }
+
         const payload = type ? req.body : req.query
-        console.log(payload,"payload")
         res.json(payload)
     } catch (error) {
         console.error(error)
