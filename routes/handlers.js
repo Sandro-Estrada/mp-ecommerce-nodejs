@@ -105,21 +105,22 @@ router.post('/notifications/weebhooks', async (req, res) => {
   console.log(req.body)
         const {
             type = null,
-            id
+            id,
+            data
         } = req.body
         let response = null
         switch(type) {
             case "payment":
-                response = await Checkout.findPaymentById(id)
+                response = await Checkout.findPaymentById(data.id)
                 break
             case "plan":
-                response = await Checkout.findPlanById(id)
+                response = await Checkout.findPlanById(data.id)
                 break
             case "subscription":
-                response = await Checkout.findSubscriptionById(id)
+                response = await Checkout.findSubscriptionById(data.id)
                 break
             case "invoice":
-                response = await Checkout.findInvoiceById(id)
+                response = await Checkout.findInvoiceById(data.id)
                 break
             default:
                 break
@@ -130,8 +131,7 @@ router.post('/notifications/weebhooks', async (req, res) => {
         }
         const payload = type ? req.body : req.query
         console.log(payload,"payload")
-        res.sendStatus(200);
-        //res.json(payload)
+        res.json(payload)
     } catch (error) {
         console.error(error)
         res.status(500).json(error)
