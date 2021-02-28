@@ -98,6 +98,7 @@ router.post('/notifications/ipn', async (req, res) => {
 
 router.post('/notifications/weebhooks', async (req, res) => {
     try {
+        console.log(req.body, "BODY WEBHOOK")
         const {
             type = null,
             data

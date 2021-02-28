@@ -77,6 +77,7 @@ class CheckoutController {
             }
         
             const response = await mercadopago.preferences.create(preference)
+            console.log(response.body.id,"--PREFERENCE ID")
             return ({id: response.body.id})
         } catch (error) {
             console.error(error)
