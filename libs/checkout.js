@@ -52,7 +52,7 @@ class CheckoutController {
                 },
                 external_reference: EMAIL,
                 auto_return: 'approved',
-                notification_url: `${BASE_URL}/notifications/weebhooks`,
+                notification_url: 'https://hookb.in/RZY0BDPQnOFREEj72Qmk',//`${BASE_URL}/notifications/weebhooks`,
                 payment_methods: {
                     excluded_payment_methods: [
                         {
