@@ -97,35 +97,38 @@ router.post('/notifications/ipn', async (req, res) => {
 
 
 router.post('/notifications/weebhooks', async (req, res) => {
-    const {
-        body: {
-            type,
+    try {
+        const {
+            type = null,
             id
+        } = req.body
+        let response = null
+        switch(type) {
+            case "payment":
+                response = await Checkout.findPaymentById(id)
+                break
+            case "plan":
+                response = await Checkout.findPlanById(id)
+                break
+            case "subscription":
+                response = await Checkout.findSubscriptionById(id)
+                break
+            case "invoice":
+                response = await Checkout.findInvoiceById(id)
+                break
+            default:
+                break
         }
-    } = req
-    let response = null
-    switch(type) {
-        case "payment":
-            response = await Checkout.findPaymentById(id)
-            break
-        case "plan":
-            response = await Checkout.findPlanById(id)
-            break
-        case "subscription":
-            response = await Checkout.findSubscriptionById(id)
-            break
-        case "invoice":
-            response = await Checkout.findInvoiceById(id)
-            break
-        default:
-            break
+        if (type) {
+            console.log(response,"-------response")
+            console.log(req.body,"-------req.body")
+        }
+        const payload = type ? req.body : req.query
+        res.json(payload)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json(error)
     }
-    if (type) {
-        console.log(response,"-------response")
-        console.log(req.body,"-------req.body")
-    }
-    const payload = type ? req.body : req.query
-    res.json(payload)
 })
 
 module.exports = router
