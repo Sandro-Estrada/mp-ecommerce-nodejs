@@ -87,7 +87,7 @@ router.post('/notifications/ipn', async (req, res) => {
 
 
 router.post('/notifications/weebhooks', (req, res) => {
-    console.log(req.body)
+    console.log(req,"-/**/-/*--/*")
     res.json(req.body)
 })
 
