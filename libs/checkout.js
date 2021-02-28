@@ -59,7 +59,7 @@ class CheckoutController {
                 },
                 external_reference: EMAIL,
                 auto_return: 'approved',
-                notification_url: `${BASE_URL}/notifications/weebhooks`, //'https://hookb.in/RZY0BDPQnOFREEj72Qmk',//
+                notification_url: `${BASE_URL}/notifications/weebhooks?source_news=webhooks`, //'https://hookb.in/RZY0BDPQnOFREEj72Qmk',//
                 payment_methods: {
                     excluded_payment_methods: [
                         {

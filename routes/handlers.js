@@ -98,6 +98,11 @@ router.post('/notifications/ipn', async (req, res) => {
 
 router.post('/notifications/weebhooks', async (req, res) => {
     try {
+        console.log("MERCADOPAGO WEBHOOK");
+  console.log("req.query")
+  console.log(req.query)
+  console.log("req.body")
+  console.log(req.body)
         const {
             type = null,
             id
