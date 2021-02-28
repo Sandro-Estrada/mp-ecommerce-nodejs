@@ -1,6 +1,5 @@
 const { Router } = require('express')
 const Checkout = require('../libs/checkout')
-const path = require('path')
 
 const router = Router()
 
@@ -27,11 +26,9 @@ router.get('/detail', async (req, res) => {
             description,
             price,
             quantity,
-            img//: path.join(__dirname, `../${img}`)
+            img
         }
-        console.log(data)
         const checkout = await Checkout.createPreference(data)
-        console.log("-----------------------------",checkout)
         res.render('detail', {
             ...req.query,
             ...checkout
@@ -90,6 +87,7 @@ router.post('/notifications/ipn', async (req, res) => {
 
 
 router.post('/notifications/weebhooks', (req, res) => {
+    console.log(req.body)
     res.json(req.body)
 })
 

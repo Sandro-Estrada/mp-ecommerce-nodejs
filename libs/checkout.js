@@ -35,14 +35,14 @@ class CheckoutController {
                 img,
                 payer = PAYER_INFO
             } = data
-            console.log(`${BASE_URL}/${img.replace('./', '')}` )
+            console.log(path.join(`${BASE_URL}`, img))
             const preference = {
                 items: [{
                     ...ITEM,
                     title: description,
                     unit_price: Number(price),
                     quantity: Number(quantity),
-                    picture_url: `${BASE_URL}/${img.replace('./', '')}` //path.join(`${BASE_URL}`, img)
+                    picture_url: path.join(`${BASE_URL}`, img)
                 }],
                 payer,
                 back_urls: {
