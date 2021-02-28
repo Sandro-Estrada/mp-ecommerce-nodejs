@@ -1,5 +1,6 @@
 const mercadopago = require("mercadopago")
 const path = require('path')
+const { objectToQueryString } = require('../libs/helpers')
 
 const BASE_URL = 'https://sandro-estrada-mp-commerce-nod.herokuapp.com'
 
@@ -35,24 +36,30 @@ class CheckoutController {
                 img,
                 payer = PAYER_INFO
             } = data
-            console.log(path.join(`${BASE_URL}`, img))
+
+            const queryString = objectToQueryString({
+                title: description,
+                price,
+                quantity,
+                img
+            })
             const preference = {
                 items: [{
                     ...ITEM,
                     title: description,
                     unit_price: Number(price),
                     quantity: Number(quantity),
-                    picture_url: path.join(`${BASE_URL}`, img)
+                    picture_url: path.join(__dirname, `../${img}`)
                 }],
                 payer,
                 back_urls: {
-                    success: `${BASE_URL}/feedback`,
-                    failure: `${BASE_URL}/feedback`,
-                    pending: `${BASE_URL}/feedback`
+                    success: `${BASE_URL}?${queryString}`,
+                    failure: `${BASE_URL}/fail?${queryString}`,
+                    pending: `${BASE_URL}/pending?${queryString}`
                 },
                 external_reference: EMAIL,
                 auto_return: 'approved',
-                notification_url: 'https://hookb.in/RZY0BDPQnOFREEj72Qmk',//`${BASE_URL}/notifications/weebhooks`,
+                notification_url: `${BASE_URL}/notifications/weebhooks`, //'https://hookb.in/RZY0BDPQnOFREEj72Qmk',//
                 payment_methods: {
                     excluded_payment_methods: [
                         {
@@ -123,6 +130,39 @@ class CheckoutController {
             } else {
                 return notPaid
             }
+        } catch (error) {
+            console.error(error)
+            throw error
+        }
+    }
+
+    static async findPlanById(id) {
+        try {
+            // I did not find information on how to get the data of a plan through the SDK
+            const plan = null
+            return plan
+        } catch (error) {
+            console.error(error)
+            throw error
+        }
+    }
+
+    static async findSubscriptionById(id) {
+        try {
+            // I did not find information on how to get the data of a subscription through the SDK
+            const subscription = null
+            return subscription
+        } catch (error) {
+            console.error(error)
+            throw error
+        }
+    }
+
+    static async findInvoiceById(id) {
+        try {
+            // I did not find information on how to get the data of an invoice through the SDK
+            const invoice = null
+            return invoice
         } catch (error) {
             console.error(error)
             throw error

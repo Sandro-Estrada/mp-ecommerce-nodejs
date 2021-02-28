@@ -1,0 +1,123 @@
+.container {
+    position: relative;
+    width: auto;
+    margin-left: 6rem;
+    margin-right: 6rem;
+    height: 100%;
+}
+
+.mt-10 {
+    margin-top: 10%;
+}
+
+.mt-9 {
+    margin-top: 9%;
+}
+
+.mt-8 {
+    margin-top: 8%;
+}
+
+.mt-5 {
+    margin-top: 5%;
+}
+
+.card-content {
+    border: none;
+    border-radius: 5px;
+    position: relative;
+    background-color: white;
+    background-clip: padding-box;
+    outline: 0;
+    box-shadow: 0 3px 9px rgb(0 0 0 / 50%);
+}
+
+.card-header {
+    padding: 2rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.header-danger {
+    background: #d75a4a;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.header-success {
+    background: #61d74a;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.header-warning {
+    background: #d7af4a;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.card-title {
+    margin: 0;
+    line-height: normal;
+    text-align: center;
+}
+
+.card-img-title {
+    border: 0;
+    display: block;
+    margin: 0 auto;
+}
+
+.card-body {
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: white;
+}
+
+.modal {
+    position: fixed;
+    width: 50%;
+    height: 50%;
+    top: 8%;
+    left: 25%;
+    opacity: 0;
+    /*Toggle visible*/
+    z-index: 0;
+    transition: all 0.3s cubic-bezier(0.36, 0.66, 0.04, 1);
+    /* padding-bottom: 30px; */
+    /* transform: translateY(-200%); */
+}
+
+.in {
+    opacity: 1;
+    /*Toggle visible*/
+    z-index: 100;
+}
+
+.animated-from-top {
+    transform: translateY(0);
+}
+
+.modal-content {
+    position: relative;
+    max-width: 40em;
+    margin: 5em auto;
+    padding: 2em;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    transition: all 0.3s cubic-bezier(0.36, 0.66, 0.04, 1);
+    border: 1px solid #ddd;
+}
+
+.modal-back {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.767);
+    content: '';
+    z-index: 50;
+}

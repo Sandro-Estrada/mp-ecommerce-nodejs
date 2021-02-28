@@ -5,7 +5,9 @@ const router = Router()
 
 router.get('/', (req, res) => {
     try {
-        res.render('home');
+        res.render('home', {
+            query: req.query
+        });
     } catch (error) {
         console.error(error)
         res.status(500).json(error)
@@ -47,6 +49,14 @@ router.get('/feedback', (req, res) => {
    })
 });
 
+router.get('/fail', (req, res) => {
+    res.render('fail', req.query);
+});
+
+router.get('/pending', (req, res) => {
+    res.render('pending', req.query);
+});
+
 router.post('/notifications/ipn', async (req, res) => {
     const {
         query: {
@@ -86,9 +96,36 @@ router.post('/notifications/ipn', async (req, res) => {
 })
 
 
-router.post('/notifications/weebhooks', (req, res) => {
-    console.log(req.query,"-/**/-/*--/*", req.body)
-    res.json(req.body)
+router.post('/notifications/weebhooks', async (req, res) => {
+    const {
+        body: {
+            type,
+            id
+        }
+    } = req
+    let response = null
+    switch(type) {
+        case "payment":
+            response = await Checkout.findPaymentById(id)
+            break
+        case "plan":
+            response = await Checkout.findPlanById(id)
+            break
+        case "subscription":
+            response = await Checkout.findSubscriptionById(id)
+            break
+        case "invoice":
+            response = await Checkout.findInvoiceById(id)
+            break
+        default:
+            break
+    }
+    if (type) {
+        console.log(response,"-------response")
+        console.log(req.body,"-------req.body")
+    }
+    const payload = type ? req.body : req.query
+    res.json(payload)
 })
 
 module.exports = router

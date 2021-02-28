@@ -436,4 +436,31 @@
       </div>
    </div>
 </div>
+{{#if (displaySuccessModal query)}}
+<div class="modal-back">
+   <div class="modal in animated-from-top" id="modal-from-top">
+      <div class="card-header header-success">
+            <h4 class="card-title">
+               <img width="100" class="card-img-title" src="./assets/success.png" alt="item">
+            </h4>
+      </div>
+      <div class="card-body">
+            <h1 style="text-align: center;">Haz comprado</h1>
+            <h1 style="text-align: center;">{{query.title}}</h1>
+            <h2><strong>Datos de la compra:</strong></h2>
+            <h3>Id de método de pago: {{query.payment_id}}</h3>
+            <h3>Referencia externa: {{query.external_reference}}</h3>
+            <h3>Id de pago: {{query.payment_id}}</h3>
+      </div>
+   </div>
+</div>
+{{/if}}
+<script>
+   $('.modal-back').click(function() {
+      window.location.href = window.location.href.split('?')[0]
+   })
+   $(".modal-back #modal-from-top").click(function(e) {
+        e.stopPropagation()
+   })
+</script>
 <script src="https://www.mercadopago.com/v2/security.js" view="home"></script>
